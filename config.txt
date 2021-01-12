@@ -1,0 +1,5 @@
+https://www.javatpoint.com/android-listview-example
+Android, activity, intent, xml, manifest
+300
+8
+15
