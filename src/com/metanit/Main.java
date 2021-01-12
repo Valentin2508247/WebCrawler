@@ -24,17 +24,27 @@ public class Main {
             return;
         }
         String csv = getCSV(list, list.size());
+        StringBuilder sb = new StringBuilder("url");
+        for (String word: config.words)
+        {
+            sb.append(' ');
+            sb.append(word);
+        }
+        sb.append(" total");
+        String header = sb.toString();
         // pages statistics
-        writeToFile(csv, "output.csv");
+        writeToFile(csv, "output.csv", header);
         list.sort((object1, object2) -> -object1.getTotal() + object2.getTotal());
         // top n
         csv = getCSV(list, config.topN);
         System.out.println(csv);
-        writeToFile(csv, "top.csv");
+        writeToFile(csv, "top.csv", header);
     }
 
-    public static void writeToFile(String text, String file){
+    public static void writeToFile(String text, String file, String header){
         try (PrintWriter out = new PrintWriter(file)) {
+            if (header != null)
+                out.println(header);
             out.print(text);
         }
         catch (Exception ex){
